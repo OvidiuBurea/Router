@@ -1,0 +1,18 @@
+Burea Ovidiu 323CA
+
+1. Daca pachetul este de tip ARP se da drop la pachet deoarece nu am implementat ARP
+2. Daca pachetul este de tip IP
+		- Se calculeza cea mai buna ruta spre adresa IP destinatie: am ales sa sortez tabela
+		crescator, apoi am folosit o cautare binara pentru a gasi next_hop-ul in tabela de routare. 
+		- Odata ce adresa next_hop-ului este cunoscuta, se verifica daca exista o intrare in
+		tabela ARP pentru acea adresa
+		- daca exista, se face forward pachetului catre aceasca, iar procesul este finalizat
+Protocolul ICMP:
+	1. Daca se primeste un pachet ICMP pe adresa routerului se trimite inapoi un ICMP reply pe 
+	aceeasi ruta pe care a venit pachetul
+	2. Daca se primeste un pachet ICMP pe adresa routerului, dar routerul nu stie unde sa-l
+	trimita mai departe (nu gaseste next-hop in tabela de routare), se trimite un pachet
+	de Host Unreachable
+	3. Daca se primeste un pachet ICMP cu TTL mai mic sau egal cu 0, se trimite un pachet
+	de Timeout
+		
